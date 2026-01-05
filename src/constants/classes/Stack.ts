@@ -2,7 +2,7 @@ type StackProps<T> = {
   // Should have --> #data: T[];
   push(item: T): void;
   pop(): T | undefined;
-  size(): number;
+  get size(): number;
   peek(): T | undefined;
 };
 
@@ -22,7 +22,7 @@ class Stack<T> implements StackProps<T> {
     return this.#data.shift();
   }
 
-  size(): number {
+  get size(): number {
     return this.#data.length;
   }
 
