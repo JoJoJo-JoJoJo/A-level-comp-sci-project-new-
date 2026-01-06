@@ -18,12 +18,21 @@ type FixedSizeVector<S extends number> = S extends S
 
 //* CLASS TYPE DEFINITIONS
 
-type VectorProps<L extends number> = {
-  data: FixedSizeVector<number>;
-  length: number;
-  add(vectors: Vector<L>[]): Vector<L>;
-  subtract(vectors: Vector<L>[]): Vector<L>;
-};
+interface VectorProps<L extends number> {
+  data: FixedSizeVector<L>;
+  size: number;
+}
+
+// Separate interface for static methods to allow Vector class to implement VectorProps interface
+interface VectorPropsStatic<L extends number> extends VectorProps<L> {
+  add<L>(
+    ...vectors: Vector<L extends number ? L : number>[]
+  ): Vector<L extends number ? L : number> | null;
+  subtract(
+    vInit: Vector<number>,
+    ...vectors: Vector<number>[]
+  ): Vector<number> | null;
+}
 
 //* DATA TYPES
 
@@ -43,4 +52,10 @@ type CellProps<S extends number> = {
   };
 };
 
-export type { CellProps, FixedSizeVector, VectorProps, DirKeys };
+export type {
+  CellProps,
+  FixedSizeVector,
+  VectorProps,
+  VectorPropsStatic,
+  DirKeys,
+};

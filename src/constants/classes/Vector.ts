@@ -1,36 +1,42 @@
 import { FixedSizeVector, VectorProps } from "../types";
 
+// typeof L should equal #length
 class Vector<L extends number> implements VectorProps<L> {
   #data: FixedSizeVector<L>;
-  #length: number;
+  #size: number;
 
   constructor(tuple: FixedSizeVector<L>) {
     this.#data = tuple;
-    this.#length = tuple.length;
+    this.#size = tuple.length;
   }
 
-  //! To +/-, vectors must be the same size!!!
-
-  // upgrade to add any number of vectors
-  static add(vectors: Vector<number>[]) {
-    return vectors.reduce(
-      (vAcc: Vector<number>, vCur: Vector<number>): Vector<number> => {
-        const sumArr: number[] = new Array(this.#length);
-        for (let i = 0; i < this.#length; i++) {
-          sumArr[i] += this.#data[i] + vector.data[i];
-        }
-        return sumArr;
-      }
-    );
-  }
-
-  // upgrade to add any number of vectors (i.e. add all parameter vectors and use as 2nd vector to subtract)
-  subtract(vector: unknown): Vector<L> {
-    const sumArr: number[] = new Array(this.#length);
-    for (let i = 0; i < this.#length; i++) {
-      sumArr[i] += this.#data[i] - vector.data[i];
+  static add<L extends number>(...vectors: Vector<L>[]): Vector<L> | null {
+    if (vectors.length === 0) {
+      return null;
     }
-    return new Vector(sumArr);
+
+    return vectors.reduce((vAcc: Vector<L>, vCur: Vector<L>): Vector<L> => {
+      for (let i = 0; i < vectors[0].#size; i++) {
+        vAcc.#data[i] += vCur.#data[i];
+      }
+      return vAcc;
+    }, new Vector<L>(Array(vectors[0].#size).fill(0) as FixedSizeVector<L>));
+  }
+
+  static subtract(
+    vInit: Vector<number>,
+    ...vectors: Vector<number>[]
+  ): Vector<number> | null {
+    if (vectors.length === 0 && !vInit) {
+      return null;
+    }
+    const vSub = Vector.add(...vectors);
+    if (vSub === null) return vInit;
+
+    for (let i = 0; i < vInit.#size; i++) {
+      vInit.#data[i] -= vSub.#data[i];
+    }
+    return vInit;
   }
 
   get data() {
@@ -38,7 +44,7 @@ class Vector<L extends number> implements VectorProps<L> {
   }
 
   get size() {
-    return this.#length;
+    return this.#size;
   }
 }
 
