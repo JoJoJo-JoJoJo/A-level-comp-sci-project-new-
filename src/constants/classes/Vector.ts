@@ -16,11 +16,11 @@ class Vector<L extends number> implements VectorProps<L> {
     }
 
     return vectors.reduce((vAcc: Vector<L>, vCur: Vector<L>): Vector<L> => {
-      for (let i = 0; i < vectors[0].#size; i++) {
-        vAcc.#data[i] += vCur.#data[i];
+      for (let i = 0; i < vectors[0].size; i++) {
+        vAcc.data[i] += vCur.data[i];
       }
       return vAcc;
-    }, new Vector<L>(Array(vectors[0].#size).fill(0) as FixedSizeVector<L>));
+    }, new Vector<L>(Array(vectors[0].size).fill(0) as FixedSizeVector<L>));
   }
 
   static subtract(
@@ -33,8 +33,8 @@ class Vector<L extends number> implements VectorProps<L> {
     const vSub = Vector.add(...vectors);
     if (vSub === null) return vInit;
 
-    for (let i = 0; i < vInit.#size; i++) {
-      vInit.#data[i] -= vSub.#data[i];
+    for (let i = 0; i < vInit.size; i++) {
+      vInit.data[i] -= vSub.data[i];
     }
     return vInit;
   }

@@ -9,6 +9,9 @@ export default {
   entry: "./src/index.ts",
   mode: "development",
   devtool: "inline-source-map",
+  devServer: {
+    port: 8080,
+  },
   module: {
     rules: [
       {

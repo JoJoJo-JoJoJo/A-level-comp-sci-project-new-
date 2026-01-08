@@ -72,6 +72,8 @@ function createMaze(
     }
   }
 
+  console.table(grid);
+
   return grid;
 }
 

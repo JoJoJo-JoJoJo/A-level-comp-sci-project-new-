@@ -19,7 +19,7 @@ function genInitGrid(
     grid.push(row);
   }
 
-  console.table(grid);
+  // console.table(grid);
 
   return grid;
 }
