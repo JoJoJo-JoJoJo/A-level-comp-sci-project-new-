@@ -77,4 +77,6 @@ function createMaze(
   return grid;
 }
 
+console.log(createMaze(9, 9, new Vector<2>([0, 0])));
+
 export default createMaze;
