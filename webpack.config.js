@@ -11,6 +11,8 @@ export default {
   devtool: "inline-source-map",
   devServer: {
     port: 8080,
+    static: "./dist",
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -35,9 +37,6 @@ export default {
       template: "./src/index.html"
     }),
   ],
-  // devServer: {
-  //   static: "./dist",
-  // },
   // optimization: {
   //   runtimeChunk: "single",
   // },

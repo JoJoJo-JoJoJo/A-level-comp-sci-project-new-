@@ -47,10 +47,10 @@ function createMaze(
     // Loop thru dirs + limit choices to available space in each dir
     for (const [dirKey, dirVector] of dirChoices) {
       const newVector =
-        Vector.add(curVector, dirVector) ?? new Vector<2>([0, 0]);
+        Vector.add<2>(dirVector, curVector) ?? new Vector<2>([0, 0]);
       if (
         isOutOfBounds(newVector) ||
-        grid[newVector.data[1]][newVector.data[0]]
+        grid[newVector.data[1]][newVector.data[0]].gen.isVisited
       ) {
         dirChoices = dirChoices.filter((dir) => dir[0] !== dirKey);
       }
@@ -61,7 +61,8 @@ function createMaze(
 
       const [dirKey, dirVector] =
         dirChoices[Math.floor(Math.random() * dirChoices.length)];
-      const newVector = Vector.add(curVector, dirVector) ?? new Vector([0, 0]);
+      const newVector =
+        Vector.add<2>(dirVector, curVector) ?? new Vector<2>([0, 0]);
       const nextCell = grid[newVector.data[1]][newVector.data[0]];
 
       curCell.gen.walls[dirKey] = false;
@@ -72,11 +73,7 @@ function createMaze(
     }
   }
 
-  console.table(grid);
-
   return grid;
 }
-
-console.log(createMaze(9, 9, new Vector<2>([0, 0])));
 
 export default createMaze;

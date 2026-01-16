@@ -10,17 +10,17 @@ class Vector<L extends number> implements VectorProps<L> {
     this.#size = tuple.length;
   }
 
-  static add<L extends number>(...vectors: Vector<L>[]): Vector<L> | null {
-    if (vectors.length === 0) {
-      return null;
-    }
+  //! ------------------------------
+  static add<S extends number>(...vectors: Vector<S>[]): Vector<S> {
+    return vectors.reduce((vAcc, vCur) => {
+      const newData = new Array<number>(vAcc.size).fill(0);
 
-    return vectors.reduce((vAcc: Vector<L>, vCur: Vector<L>): Vector<L> => {
       for (let i = 0; i < vectors[0].size; i++) {
-        vAcc.data[i] += vCur.data[i];
+        newData[i] += vAcc.data[i] + vCur.data[i];
       }
-      return vAcc;
-    }, new Vector<L>(Array(vectors[0].size).fill(0) as FixedSizeVector<L>));
+
+      return new Vector<S>(newData as FixedSizeVector<S>);
+    }, new Vector<S>(Array(vectors[0].size).fill(0) as FixedSizeVector<S>));
   }
 
   static subtract(
@@ -41,6 +41,10 @@ class Vector<L extends number> implements VectorProps<L> {
 
   get data() {
     return this.#data;
+  }
+
+  set data(newData: FixedSizeVector<L>) {
+    this.#data = newData;
   }
 
   get size() {

@@ -1,11 +1,13 @@
-import { GameComponent } from "./components/GameComponent";
+import { GameComponent } from "./components/game/GameComponent";
 import Vector from "./constants/classes/Vector";
+import { DIFFICULTIES } from "./constants/constants";
 import createMaze from "./utils/createMaze";
 
 const root = document.getElementById("root")!;
 
-const game = new GameComponent();
+const [cols, rows] = DIFFICULTIES.EASY;
+const maze = createMaze(cols, rows, new Vector<2>([0, 0]));
+console.table(maze);
+const game = new GameComponent(maze, [cols, rows]);
 
 root.appendChild(game.render());
-
-console.table(createMaze(9, 9, new Vector<2>([0, 0])));

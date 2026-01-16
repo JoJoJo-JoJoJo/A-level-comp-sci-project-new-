@@ -1,17 +1,16 @@
-import { DIFFICULTIES, GAME_HEIGHT } from "../constants/constants";
-import { CellProps } from "../constants/types";
-import gridHtml from "../grid";
-import Component from "./Component";
-import { div } from "./htmlElementsArtificial";
+import { GAME_HEIGHT } from "../../constants/constants";
+import { CellProps } from "../../constants/types";
+import Component from "../Component";
+import Grid from "./Grid";
+import { div } from "../htmlElementsArtificial";
 
 // Dispatched events were drilled through the stateless grid component, but by emitting a custom event, every cell component can listen for it and act with the data passed through in the DTO
 
 export class GameComponent extends Component {
-  constructor(maze: CellProps<2>[][] = []) {
+  constructor(maze: CellProps<2>[][] = [], order: [number, number]) {
     super();
     // Change difficulties object to implement FixedSizeArray<2>
-    const [cols, rows] = DIFFICULTIES.EASY;
-    this.setState({ maze, order: [cols, rows] });
+    this.setState({ maze, order });
   }
 
   override render(): HTMLElement {
@@ -21,7 +20,7 @@ export class GameComponent extends Component {
         height: `${GAME_HEIGHT + 10}px`,
         width: `${(this.state.cols / this.state.rows) * (GAME_HEIGHT + 10)}px`,
       },
-      gridHtml(this.state.maze, [this.state.cols, this.state.rows])
+      Grid(this.state.maze, [this.state.cols, this.state.rows])
     );
   }
 }

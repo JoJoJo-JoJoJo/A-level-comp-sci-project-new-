@@ -1,3 +1,4 @@
+import Vector from "../constants/classes/Vector";
 import { GRID_DIMENSIONS, INIT_CELL_STATE } from "../constants/constants";
 import { CellProps } from "../constants/types";
 
@@ -12,7 +13,7 @@ function genInitGrid(
 
     for (let x = 0; x < cols; x++) {
       const cell = JSON.parse(JSON.stringify(INIT_CELL_STATE));
-      cell.gen.pos = [x, y];
+      cell.gen.pos = new Vector([x, y]);
       row.push(cell);
     }
 
