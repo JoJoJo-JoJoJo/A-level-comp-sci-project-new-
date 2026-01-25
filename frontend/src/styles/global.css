@@ -1,3 +1,69 @@
+/* CSS Reset taken from https://www.joshwcomeau.com/css/custom-css-reset/ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
 /* For now I'll use dark theme only */
 :root,
 .dark,
@@ -142,4 +208,39 @@
 .dark-theme,
 :is(.dark, .dark-theme) :where(.radix-themes:not(.light, .light-theme)) {
   --color-background: #0f0a0f;
+}
+
+/* Core CSS styles */
+
+html {
+  font-size: 16px;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: monospace;
+  font-weight: normal;
+}
+
+/* Maybe use css grid for page layout */
+#root {
+  height: 100%;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: repeating-conic-gradient(
+    var(--violet-10) 0deg 45deg,
+    var(--violet-6) 45deg 90deg,
+    var(--violet-3) 90deg 135deg,
+    var(--violet-9) 135deg 180deg,
+    var(--violet-6) 180deg 225deg,
+    var(--violet-10) 225deg 270deg,
+    var(--violet-9) 270deg 315deg,
+    var(--violet-3) 315deg 360deg
+  );
+  --tile-size: calc(100vw / 20);
+  background-size: var(--tile-size) var(--tile-size);
 }

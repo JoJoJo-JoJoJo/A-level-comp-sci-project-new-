@@ -16,3 +16,15 @@ export const div: HTMLElementFunction = (
 export const ul: HTMLElementFunction = (
   ...args: Array<ElementDefinition>
 ): HTMLElement => createElement("ul", ...args);
+
+export const header: HTMLElementFunction = (
+  ...args: Array<ElementDefinition>
+): HTMLElement => createElement("header", ...args);
+
+export const h1: HTMLElementFunction = (
+  ...args: Array<ElementDefinition>
+): HTMLElement => createElement("h1", ...args);
+
+export const h2: HTMLElementFunction = (
+  ...args: Array<ElementDefinition>
+): HTMLElement => createElement("h2", ...args);
