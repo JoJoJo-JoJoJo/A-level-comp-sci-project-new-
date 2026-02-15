@@ -12,7 +12,7 @@ function createMaze(
 ): CellProps<typeof GRID_DIMENSIONS>[][] {
   const grid = genInitGrid(cols, rows);
 
-  // Choose init cell, mark as visited and push to stack
+  //? Choose starting cell, mark as visited and push to stack
   const initCell: CellProps<typeof GRID_DIMENSIONS> =
     grid[vStart.data[1]][vStart.data[0]];
   initCell.gen.isVisited = true;
@@ -20,18 +20,18 @@ function createMaze(
   let stack: StackProps<CellProps<typeof GRID_DIMENSIONS>> = new Stack();
   stack.push(initCell);
 
-  let curCell: CellProps<typeof GRID_DIMENSIONS> = initCell;
-
-  // Needs work to ensure proper type safety and valid i/o
+  //? Checks if a given position vector is out of bounds of the maze
   const isOutOfBounds = (vNew: Vector<2>): boolean =>
     vNew.data[0] < 0 ||
     vNew.data[0] >= rows ||
     vNew.data[1] < 0 ||
     vNew.data[1] >= cols;
 
-  // While stack not empty
+  let curCell: CellProps<typeof GRID_DIMENSIONS> = initCell;
+
+  //? While stack not empty
   while (stack.size > 0) {
-    // Pop cell from stack + make it current cell
+    //? Pop cell from stack + make it current cell
     const temp = stack.pop();
     if (typeof temp === "undefined") {
       throw new TypeError(
@@ -40,11 +40,11 @@ function createMaze(
     }
     curCell = temp;
 
-    // If current cell has any neighboring cells which have not been visited
+    //? If current cell has any neighboring cells which have not been visited
     const curVector = curCell.gen.pos;
     let dirChoices = MV_DIRS;
 
-    // Loop thru dirs + limit choices to available space in each dir
+    //? Loop thru dirs + limit choices to available space in each dir
     for (const [dirKey, dirVector] of dirChoices) {
       const newVector =
         Vector.add<2>(dirVector, curVector) ?? new Vector<2>([0, 0]);
@@ -56,18 +56,22 @@ function createMaze(
       }
     }
 
+    //? If still any valid dirs remaining
     if (dirChoices.length !== 0) {
       stack.push(curCell);
 
+      //? Pick random dir + mv to it
       const [dirKey, dirVector] =
         dirChoices[Math.floor(Math.random() * dirChoices.length)];
       const newVector =
         Vector.add<2>(dirVector, curVector) ?? new Vector<2>([0, 0]);
       const nextCell = grid[newVector.data[1]][newVector.data[0]];
 
+      //? Rm walls for both cells in dir mvd
       curCell.gen.walls[dirKey] = false;
-
       nextCell.gen.walls[OPP_WALLS[dirKey]] = false;
+
+      //? Visit next cell + push to stack
       nextCell.gen.isVisited = true;
       stack.push(nextCell);
     }

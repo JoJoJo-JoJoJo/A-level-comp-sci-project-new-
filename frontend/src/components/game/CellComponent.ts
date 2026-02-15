@@ -9,19 +9,19 @@ export class CellComponent extends Component {
   constructor(
     id: string,
     tile: CellProps<2>,
-    styles: { width: string; height: string }
+    styles: { width: string; height: string },
   ) {
     super();
     this.#id = id;
     this.#styles = styles;
 
     const borders: [string, boolean][] = Object.entries(tile.gen.walls).filter(
-      ([_, v]) => v === true
+      ([_, v]) => v === true,
     );
     this.setState({ borders });
   }
 
-  override render(): HTMLElement | Array<HTMLElement> {
+  override render(): HTMLElement {
     return div({
       id: this.#id,
       class: String.raw`cell-border ${this.state.borders

@@ -14,6 +14,7 @@ class Vector<L extends number> implements VectorProps<L> {
   static add<S extends number>(...vectors: Vector<S>[]): Vector<S> {
     return vectors.reduce(
       (vAcc, vCur) => {
+        if (!(vCur instanceof Vector) || vCur.size !== vAcc.size) return vAcc;
         const newData = new Array<number>(vAcc.size).fill(0);
 
         for (let i = 0; i < vectors[0].size; i++) {
@@ -26,14 +27,14 @@ class Vector<L extends number> implements VectorProps<L> {
     );
   }
 
-  static subtract(
-    vInit: Vector<number>,
-    ...vectors: Vector<number>[]
-  ): Vector<number> | null {
+  static subtract<S extends number>(
+    vInit: Vector<S>,
+    ...vectors: Vector<S>[]
+  ): Vector<S> | null {
     if (vectors.length === 0 && !vInit) {
       return null;
     }
-    const vSub = Vector.add(...vectors);
+    const vSub = Vector.add<S>(...vectors);
     if (vSub === null) return vInit;
 
     for (let i = 0; i < vInit.size; i++) {

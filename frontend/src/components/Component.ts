@@ -1,4 +1,4 @@
-//? This class is a base class to be extended from - I didn't want to add a framework to the project so I am using a style of component notation inspired by https://www.divotion.com/blog/creating-js-components-without-a-framework, from which the code for this class and the attribute types are taken from https://github.com/TomRaaff/tr-utilities-lib/tree/main/freeze/js-components
+//? This class is a base class to be extended from - I didn't want to add a framework to the project so I am using a style of component notation inspired by https://www.divotion.com/blog/creating-js-components-without-a-framework
 
 let id = 0;
 
@@ -11,18 +11,19 @@ export default abstract class Component {
     this.render = new Proxy(this.render, this.renderHandler);
   }
 
+  //? This method sets state that is persisted across re-renders through the use of Proxy objects
   protected setState(state: object) {
     this.state = new Proxy(state, this.fieldHandler);
   }
 
-  //
+  //? This handler
   renderHandler: ProxyHandler<any> = {
     apply: (target, thisArg, argArr) => {
       const newComponent = target.apply(thisArg, ...argArr) as HTMLElement;
       newComponent.dataset.componentId = this.componentId;
 
       const oldComponent = document.querySelector(
-        `[data-component-id="${this.componentId}"]`
+        `[data-component-id="${this.componentId}"]`,
       );
       oldComponent?.replaceWith(newComponent);
       return newComponent;
@@ -38,6 +39,7 @@ export default abstract class Component {
     },
   };
 
+  // This method determines whether the component is still
   isComponent(): boolean {
     return true;
   }

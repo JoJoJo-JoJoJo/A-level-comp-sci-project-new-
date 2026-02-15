@@ -2,6 +2,7 @@ import Vector from "../constants/classes/Vector";
 import { GRID_DIMENSIONS, INIT_CELL_STATE } from "../constants/constants";
 import { CellProps } from "../constants/types";
 
+//? This method generates a n-D array of cells, with each cell containing data of type 'CellProps<n>'
 function genInitGrid(
   cols: number,
   rows: number,
@@ -12,6 +13,7 @@ function genInitGrid(
     const row = [];
 
     for (let x = 0; x < cols; x++) {
+      //? Ensure that cell data is in JSON object format before use
       const cell = JSON.parse(JSON.stringify(INIT_CELL_STATE));
       cell.gen.pos = new Vector<2>([x, y]);
       row.push(cell);
@@ -19,8 +21,6 @@ function genInitGrid(
 
     grid.push(row);
   }
-
-  // console.table(grid);
 
   return grid;
 }
