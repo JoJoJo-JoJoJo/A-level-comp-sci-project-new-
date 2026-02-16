@@ -7,6 +7,7 @@ export default abstract class Component {
   protected componentId: string;
 
   constructor() {
+    //? Assigns each component an id so it is more easily found on the DOM for re-renders, state changes, etc.
     this.componentId = (id++).toString();
     this.render = new Proxy(this.render, this.renderHandler);
   }
@@ -16,7 +17,7 @@ export default abstract class Component {
     this.state = new Proxy(state, this.fieldHandler);
   }
 
-  //? This handler
+  //? This handler is used to trap function calls of the render method and re-assign the old component's id to the new component --> target [[Call]] internal method
   renderHandler: ProxyHandler<any> = {
     apply: (target, thisArg, argArr) => {
       const newComponent = target.apply(thisArg, ...argArr) as HTMLElement;
@@ -30,7 +31,7 @@ export default abstract class Component {
     },
   };
 
-  // I don't want to block the state being changed, but I do want to re-render on a state change --> target [[Set]] internal method
+  //? This handler causes a re-render of the target component whilst preserving its state --> target [[Set]] internal method
   fieldHandler: ProxyHandler<any> = {
     set: (target: any, prop: string | symbol, value: any): boolean => {
       target[prop] = value;
@@ -39,7 +40,7 @@ export default abstract class Component {
     },
   };
 
-  // This method determines whether the component is still
+  //? This method is used to identify and distinguish components (i.e. children of this class) throughout the codebase
   isComponent(): boolean {
     return true;
   }

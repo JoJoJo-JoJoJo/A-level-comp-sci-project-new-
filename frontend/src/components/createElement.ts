@@ -8,6 +8,7 @@ import { ElementDefinition } from "./htmlElementsArtificial";
 type Attribute = [keyof GlobalAttributes, any];
 type EventAttribute = [keyof EventHandlerAttributes | string, Function];
 
+//? Determines whether the given argument is a string, a HTML element or a component
 function isStringOrHTMLElementOrComponent(arg: ElementDefinition): boolean {
   return (
     arg !== undefined &&
@@ -17,6 +18,7 @@ function isStringOrHTMLElementOrComponent(arg: ElementDefinition): boolean {
   );
 }
 
+//? Assigns html attribute(s) to a given element
 function assignAttributes(htmlElement: any, attr: Array<Attribute>) {
   attr.forEach(([key, val]) => {
     if (typeof val === "boolean") {
@@ -29,35 +31,39 @@ function assignAttributes(htmlElement: any, attr: Array<Attribute>) {
   });
 }
 
+//? Assigns event listener(s) to a given element
 function assignEventListeners(
   htmlElement: any,
-  events: Array<EventAttribute>
+  events: Array<EventAttribute>,
 ): void {
   events.forEach(([key, val]) => {
-    // All event handler attributes on html use the notation "on-<event>", so I can extract the event name in the same way consistently
+    //? All event handler attributes on html use the notation "on-<event>", so I can extract the event name in the same way consistently
     htmlElement.addEventListener(key.slice(2), val);
   });
 }
 
+//? Creates a specific type of html element with specified attributes and/or event listeners
 export function createElement(type: string, ...args: Array<ElementDefinition>) {
   const element = document.createElement(type);
+
   const attributes = args.find(
-    (arg) => !isStringOrHTMLElementOrComponent(arg)
+    (arg) => !isStringOrHTMLElementOrComponent(arg),
   ) as GlobalAttributes;
+
   const innerContent = args.filter(isStringOrHTMLElementOrComponent) as Array<
     string | HTMLElement | Component
   >;
 
   if (attributes) {
-    // Separate out the event attributes so I can easily assign an array of each attribute type to the element being created
+    //? Separate out the event listeners and attributes so I can assign them separately
     const attr = Object.entries(attributes).filter(
-      ([key]) => !key.startsWith("on")
+      ([key]) => !key.startsWith("on"),
     ) as Array<Attribute>;
     const events = Object.entries(attributes).filter(([key]) =>
-      key.startsWith("on")
+      key.startsWith("on"),
     ) as Array<EventAttribute>;
 
-    // Assign the attributes and event attributes
+    //? Assign the attributes and event listeners
     assignAttributes(element, attr);
     assignEventListeners(element, events);
   }

@@ -9,7 +9,7 @@ import { div } from "../htmlElementsArtificial";
 export class GameComponent extends Component {
   constructor(
     maze: CellProps<2>[][] = [],
-    order: { cols: number; rows: number }
+    order: { cols: number; rows: number },
   ) {
     super();
     // Change difficulties object to implement FixedSizeArray<2>
@@ -25,7 +25,7 @@ export class GameComponent extends Component {
           (this.state.order.cols / this.state.order.rows) * (GAME_HEIGHT + 10)
         }px`,
       },
-      Grid(this.state.maze, [this.state.cols, this.state.rows])
+      Grid(this.state.maze, [this.state.cols, this.state.rows]),
     );
   }
 }
