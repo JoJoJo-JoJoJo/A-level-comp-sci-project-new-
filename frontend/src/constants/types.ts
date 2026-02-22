@@ -51,7 +51,13 @@ type CellProps<S extends number> = {
     };
     pos: Vector<S>;
   };
+  isPath: boolean;
 };
+
+type DirBtns = Record<
+  string,
+  { key: DirKeys; svg: (HTMLElement & SVGElement) | "" }
+>;
 
 export type {
   CellProps,
@@ -59,4 +65,5 @@ export type {
   VectorProps,
   VectorPropsStatic,
   DirKeys,
+  DirBtns,
 };

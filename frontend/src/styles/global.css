@@ -227,10 +227,6 @@ body {
 #root {
   height: 100%;
   width: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-image: repeating-conic-gradient(
     var(--violet-10) 0deg 45deg,
     var(--violet-6) 45deg 90deg,
@@ -243,4 +239,17 @@ body {
   );
   --tile-size: calc(100vw / 20);
   background-size: var(--tile-size) var(--tile-size);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.temp-page-wrapper {
+  height: 100%;
+  width: auto;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 1;
+}
+
+.btn {
+  padding: 5px;
 }

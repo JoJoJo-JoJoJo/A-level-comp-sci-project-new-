@@ -1,0 +1,37 @@
+.form {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-field {
+  height: 50px;
+  width: 60%;
+  margin-bottom: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subtext {
+  font-size: 80%;
+  color: #999999;
+}
+
+.form-input + .validity {
+  padding-right: 30px;
+}
+
+.form-input:invalid + .validity::after {
+  position: absolute;
+  content: "✖";
+  padding-left: 5px;
+}
+
+.form-input:valid + .validity::after {
+  position: absolute;
+  content: "✓";
+  padding-left: 5px;
+}

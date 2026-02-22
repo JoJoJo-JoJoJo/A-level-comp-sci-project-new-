@@ -1,0 +1,18 @@
+.sidebar {
+  /*! temp color for UI layout */
+  background-color: #fff;
+  /* background-color: var(--gray-a2); */
+  /*! temp color for UI layout */
+  border-right: 2px solid red;
+  /* border-right: 2px solid var(--gray-8); */
+  display: grid;
+  grid-template-rows: 10% 90%;
+  grid-template-columns: 1;
+  font-size: 1.5rem;
+}
+
+/* .header > .title {
+  color: var(--violet-11);
+  font-size: 2rem;
+  letter-spacing: 5px;
+} */

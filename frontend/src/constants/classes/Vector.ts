@@ -1,16 +1,16 @@
 import { FixedSizeVector, VectorProps } from "../types";
 
-// typeof L should equal #length
-class Vector<L extends number> implements VectorProps<L> {
+export default class Vector<L extends number> implements VectorProps<L> {
   #data: FixedSizeVector<L>;
   #size: number;
 
   constructor(tuple: FixedSizeVector<L>) {
     this.#data = tuple;
+    //? this.#size should equal L
     this.#size = tuple.length;
   }
 
-  //! ------------------------------
+  //? Takes 2+ vectors and returns their vector sum
   static add<S extends number>(...vectors: Vector<S>[]): Vector<S> {
     return vectors.reduce(
       (vAcc, vCur) => {
@@ -26,10 +26,11 @@ class Vector<L extends number> implements VectorProps<L> {
     );
   }
 
-  static subtract(
-    vInit: Vector<number>,
-    ...vectors: Vector<number>[]
-  ): Vector<number> | null {
+  //? Takes 2+ vectors and returns the vector difference between the first and the sum of the rest
+  static subtract<S extends number>(
+    vInit: Vector<S>,
+    ...vectors: Vector<S>[]
+  ): Vector<S> | null {
     if (vectors.length === 0 && !vInit) {
       return null;
     }
@@ -42,6 +43,7 @@ class Vector<L extends number> implements VectorProps<L> {
     return vInit;
   }
 
+  //? Necessary getters + setters for the program
   get data() {
     return this.#data;
   }
@@ -54,5 +56,3 @@ class Vector<L extends number> implements VectorProps<L> {
     return this.#size;
   }
 }
-
-export default Vector;

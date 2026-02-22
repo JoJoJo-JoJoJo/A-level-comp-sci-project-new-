@@ -2,8 +2,7 @@ import { EventHandlerAttributes } from "./EventHandlerAttributes";
 import { AriaAttributes } from "./AriaAttributes";
 
 export interface GlobalAttributes
-  extends EventHandlerAttributes,
-    AriaAttributes {
+  extends EventHandlerAttributes, AriaAttributes {
   accept?: string | boolean;
   accesskey?: string | boolean;
   action?: string | boolean;
@@ -16,8 +15,11 @@ export interface GlobalAttributes
   checked?: string | boolean;
   cite?: string | boolean;
   class?: string | boolean;
+  closedby?: "any" | "closerequest" | "none";
   cols?: string | boolean;
   colspan?: string | boolean;
+  command?: "show-modal" | "close" | "request-close";
+  commandfor?: string;
   content?: string | boolean;
   contenteditable?: string | boolean;
   controls?: string | boolean;
@@ -55,6 +57,7 @@ export interface GlobalAttributes
   media?: string | boolean;
   method?: string | boolean;
   min?: string | boolean;
+  minlength?: string | boolean;
   multiple?: string | boolean;
   muted?: string | boolean;
   name?: string | boolean;

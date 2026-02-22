@@ -37,7 +37,7 @@ function assignEventListeners(
   events: Array<EventAttribute>,
 ): void {
   events.forEach(([key, val]) => {
-    //? All event handler attributes on html use the notation "on-<event>", so I can extract the event name in the same way consistently
+    //? All event handler attributes on html use the notation "on<event>", so I can extract the event name in the same way consistently
     htmlElement.addEventListener(key.slice(2), val);
   });
 }
