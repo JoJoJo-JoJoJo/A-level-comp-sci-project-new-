@@ -41,8 +41,8 @@ export default {
   },
   //? Defines the location for bundled files output from compilation
   output: {
+    path: path.resolve(__dirname, "public"),
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
   plugins: [
