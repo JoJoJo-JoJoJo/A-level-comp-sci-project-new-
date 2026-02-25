@@ -4,10 +4,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const pgp = require('pg-promise');
 
 //? Import routers from ./routes
 const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
 const formsRouter = require('./routes/forms');
 
 const app = express();
@@ -25,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //? Router setup
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 app.use('/forms', formsRouter);
 
 //? Catch 404 and forward to error handler

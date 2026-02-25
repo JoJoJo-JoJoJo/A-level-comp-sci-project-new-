@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('../config/pgdb');
 const router = express.Router();
 
 //? GET home page - temp
@@ -6,14 +7,32 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-//! GET register/login page
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+//? GET register/login page
+//* Should be first page to load on entering website
+router.get('/', function (_req, res, _next) {
+  res.render('index', { title: 'Amaze' });
 });
 
-//! GET home page
+//? GET home page
+//* Should be accessible once user has been authorized
+//! Needs form POST req + middleware in chain - GET is end of chain
 router.get('/home', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  //* pSQL statement should be something like: 
+  //* 'SELECT u.name, g.class FROM Users as u LEFT JOIN Groups as g ON u.group_id=g.id WHERE u.id=00000001'
+
+  //? temp name + class
+  const userName = 'John Doe';
+  const userClass = '10A';
+
+  res.render('home', {
+    title: 'Amaze | Home',
+    user_initial: userName.slice(0, 1).toUpperCase(),
+    user_name: userName,
+    user_class: userClass
+  });
 });
+//! Needs middleware to send data to client w/ user info to be displayed on navbar
+//* Create sidebar for home page statically on server side w/ user display?
+//* Or can return JSON w/ data to be displayed to reduce server overhead
 
 module.exports = router;

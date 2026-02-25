@@ -1,0 +1,11 @@
+extends layout 
+
+block content
+  div(id='home-wrapper', class='page-wrapper')
+    aside(class='sidebar')
+      div(id='userSegment', class='user-segment')
+        div(class='user-icon')
+          p= user_initial
+        div(class='user-info')
+          p(class='user-name')= user_name
+          p(class='user-class')= user_class
