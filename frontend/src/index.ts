@@ -10,17 +10,23 @@ import { RulesModal } from "./components/modal/modals/RulesModal";
 
 const root = document.getElementById("root")!;
 
-// fetch("http://localhost:3000")
-//   .then((res) => {
-//     if (!res.status) {
-//       throw new Error(`Server error: ${res.status} ${res.statusText}`);
-//     }
-//     return res.json();
-//   })
-//   .then((data) => {
-//     root.innerText = data.msg;
-//   })
-//   .catch((err) => console.error(err));
+async function fetchPage() {
+  try {
+    const response = await fetch("http://localhost:3000");
+
+    if (!response.status) {
+      throw new Error(
+        `Server error: ${response.status} ${response.statusText}`,
+      );
+    }
+
+    const data = await response.json();
+
+    root.innerHTML = data.msg;
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 const sidebar = new Sidebar({
   name: "John Doe",
