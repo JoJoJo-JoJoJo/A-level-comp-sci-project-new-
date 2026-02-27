@@ -1,13 +1,14 @@
-const ENV = require('dotenv');
-const pgp = require('pg-promise');
-//! Needs updating with correct information before working on POST routes
-const db = pgp(`postgres://postgres:${ENV.DB_PASSWORD}@localhost:5432/Amaze`);
+require('dotenv').config();
+const { Pool } = require('pg');
 
-//* Example DB query
-async function exDbQuery() {
-  try {
-    await db.one('SELECT * FROM Users', _, (data) => console.log("DATA: " + data));
-  } catch (err) {
-    console.error(err.message);
-  }
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
+
+module.exports = {
+  query: (text, params) => pool.query(text, params),
 }

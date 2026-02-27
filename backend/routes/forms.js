@@ -3,7 +3,7 @@ const router = express.Router();
 
 //? GET forms route (should have a message as needs id)
 router.get('/', function (_req, res, _next) {
-  res.send('Please use a valid form route: register, login, change_password');
+  res.send('Please use a valid form route: register, login, change-password');
 });
 
 //? GET register form
