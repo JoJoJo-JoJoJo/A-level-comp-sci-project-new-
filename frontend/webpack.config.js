@@ -8,8 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  //? The entry point for the application
-  entry: "./src/index.ts",
+  //? The entry points for the application
+  entry: "./src/router.ts",
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
@@ -41,18 +41,21 @@ export default {
   },
   //? Defines the location for bundled files output from compilation
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "bundle.js",
+    filename: "index.js",
+    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
+  //? Inserts a custom-made template html file into the output bundle
   plugins: [
-    //? Inserts a custom-made template html file into the output bundle
     new HtmlWebpackPlugin({
-      title: "Development",
-      template: "./src/index.html"
-    }),
+      inject: true,
+      template: `./src/index.html`,
+      filename: `index.html`,
+    })
   ],
   // optimization: {
-  //   runtimeChunk: "single",
+  //   splitChunks: {
+  //     chunks: "all"
+  //   }
   // },
 };

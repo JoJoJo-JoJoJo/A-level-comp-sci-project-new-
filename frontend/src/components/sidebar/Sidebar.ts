@@ -9,7 +9,7 @@ import "./styles.css";
 export type SidebarState = {
   user: {
     name: string;
-    class: string;
+    group: string;
   };
 };
 

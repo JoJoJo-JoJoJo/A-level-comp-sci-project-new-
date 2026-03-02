@@ -1,5 +1,7 @@
+import { _navigate } from "../../router";
+import { getFromSessionStorage } from "../../utils/sessionStorage";
 import Component from "../Component";
-import { form, input, label, p, span } from "../htmlElementsArtificial";
+import { div, form, input, label, p, span } from "../htmlElementsArtificial";
 import "./styles.css";
 
 export class ChangePasswordForm extends Component {
@@ -43,66 +45,121 @@ export class ChangePasswordForm extends Component {
     return form(
       {
         class: "form form-change-password",
+        id: "formChangePassword",
         //* Need to check if form route ID works like this on action attribute
         action: "/form:change_password/submit",
         method: "PUT",
+        onsubmit: async (e: SubmitEvent) => {
+          //? Prevent default browser behavior
+          e.preventDefault();
+
+          const changePasswordForm = document.getElementById(
+            "formChangePassword",
+          )! as HTMLFormElement;
+
+          //? Collect form data
+          //! Terrible practice to use the type any but I don't want to fix the type right now
+          const formData = new URLSearchParams(
+            new FormData(changePasswordForm) as any,
+          );
+
+          const userId = getFromSessionStorage<number>("userId");
+          if (userId === null) return;
+
+          formData.append("user_id", JSON.stringify(userId));
+
+          console.log(formData.toString());
+
+          try {
+            //? POST user's form data to server + wait for response
+            const res = await fetch(
+              "http://localhost:3000/forms/user/update/password",
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: formData,
+              },
+            );
+
+            if (!res.ok) {
+              console.error("Server responded with error code: " + res.status);
+            }
+
+            //? Navigate to home page
+            _navigate("/home");
+          } catch (err) {
+            console.error(err);
+          }
+        },
       },
       //? New password field
-      label(
+      div(
         {
-          for: "new-password",
-          class: "form-label",
+          class: "form-field",
         },
-        "New password:",
+        label(
+          {
+            for: "new-password",
+            class: "form-label",
+          },
+          "New password:",
+        ),
+        input({
+          type: "text",
+          id: "new-password",
+          name: "user_password",
+          required: true,
+          placeholder: "Choose a password",
+          minlength: "8",
+          maxlength: "32",
+          size: "32",
+          class: "form-input",
+          pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,32}$",
+          title:
+            "Password should contain a lowercase and uppercase character, a digit and a special character, and be between 8-32 characters",
+          onchange: () => this.handlePasswordCheck(),
+        }),
+        span({
+          class: "validity",
+        }),
       ),
-      input({
-        type: "text",
-        id: "new-password",
-        name: "user_new_password",
-        required: true,
-        placeholder: "Choose a new password",
-        minlength: "8",
-        maxlength: "32",
-        size: "32",
-        class: "form-input",
-        pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,32}$",
-        title:
-          "Passwords should contain a lowercase and uppercase character, a digit and a special character, and be between 8-20 characters",
-        onchange: () => this.handlePasswordCheck(),
-      }),
-      span({
-        class: "validity",
-      }),
       //? Re-enter new password field
-      label(
+      div(
         {
-          for: "new-password-check",
-          class: "form-label",
+          class: "form-field",
         },
-        "Re-enter new password",
+        label(
+          {
+            for: "new-password-check",
+            class: "form-label",
+          },
+          "Re-enter password:",
+        ),
+        input({
+          type: "text",
+          id: "new-password-check",
+          name: "user_password_check",
+          required: true,
+          placeholder: "Re-enter your password",
+          minlength: "8",
+          maxlength: "32",
+          size: "32",
+          class: "form-input",
+          pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,32}$",
+          title:
+            "Password should contain a lowercase and uppercase character, a digit and a special character, and be between 8-20 characters",
+          onchange: () => this.handlePasswordCheck(),
+        }),
+        span({
+          class: "validity",
+        }),
+        p({
+          id: "subtext-status",
+          class: "subtext",
+        }),
       ),
-      input({
-        type: "text",
-        id: "new-password-check",
-        name: "user_new_password_check",
-        required: true,
-        placeholder: "Re-enter your new password",
-        minlength: "8",
-        maxlength: "32",
-        size: "32",
-        class: "form-input",
-        pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,16}$",
-        title:
-          "Passwords should contain a lowercase and uppercase character, a digit and a special character, and be between 8-20 characters",
-        onchange: () => this.handlePasswordCheck(),
-      }),
-      span({
-        class: "validity",
-      }),
-      p({
-        id: "subtext-status",
-        class: "subtext",
-      }),
       //? Form submit button
       input({
         type: "submit",

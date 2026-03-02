@@ -8,7 +8,7 @@ export class UserSegment extends Component {
     super();
 
     //? Sets the state for this class
-    this.setState({ name: user.name, class: user.class });
+    this.setState({ name: user.name, group: user.group });
   }
 
   //? Renders the HTML for this component
@@ -21,6 +21,7 @@ export class UserSegment extends Component {
       div(
         {
           class: "user-icon",
+          id: "userIcon",
         },
         p(this.state.name.slice(0, 1).toUpperCase()),
       ),
@@ -31,14 +32,16 @@ export class UserSegment extends Component {
         p(
           {
             class: "user-name",
+            id: "userName",
           },
           this.state.name,
         ),
         p(
           {
-            class: "user-class",
+            class: "user-group",
+            id: "userGroup",
           },
-          "Class " + this.state.class,
+          this.state.group,
         ),
       ),
     );

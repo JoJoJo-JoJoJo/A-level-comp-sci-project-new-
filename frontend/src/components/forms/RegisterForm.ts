@@ -1,3 +1,5 @@
+import { updateUserSidebarInfo } from "../../router";
+import { setToSessionStorage } from "../../utils/sessionStorage";
 import Component from "../Component";
 import { div, form, input, label, p, span } from "../htmlElementsArtificial";
 import "./styles.css";
@@ -41,34 +43,81 @@ export class RegisterForm extends Component {
     return form(
       {
         class: "form form-register",
-        //* Need to check if form route ID works like this on action attribute
-        action: "/form:register/submit",
-        method: "POST",
+        id: "formRegister",
+        onsubmit: async (e: SubmitEvent) => {
+          //? Prevent default browser behavior
+          e.preventDefault();
+
+          const registerForm = document.getElementById(
+            "formRegister",
+          )! as HTMLFormElement;
+
+          //? Collect form data
+          //! Terrible practice to use the type any but I don't want to fix the type right now
+          const formData = new URLSearchParams(
+            new FormData(registerForm) as any,
+          );
+
+          console.log(formData.toString());
+
+          try {
+            //? POST user's form data to server + wait for response
+            const res = await fetch("http://localhost:3000/forms/user/create", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: formData,
+            });
+
+            if (!res.ok) {
+              console.error("Server responded with error code: " + res.status);
+            }
+
+            const data = await res.json();
+
+            if (typeof data.userId === "string") {
+              setToSessionStorage<number>("userId", +data.userId);
+            }
+
+            if (
+              typeof data.name !== "string" ||
+              typeof data.groupName !== "string"
+            ) {
+              console.error(
+                "Typeof user's name and/or group name should be a string",
+              );
+            }
+
+            //? Navigate to home page + update user info on sidebar
+            updateUserSidebarInfo(data);
+          } catch (err) {
+            console.error(err);
+          }
+        },
       },
-      //? Class ID field (optional)
+      //? Group ID field (optional)
       div(
         {
           class: "form-field",
         },
         label(
           {
-            for: "class-id",
+            for: "group-id",
             class: "form-label",
           },
           "Class ID:",
         ),
         input({
           type: "text",
-          id: "class-id",
-          name: "user_class_id",
-          placeholder: "00000007",
-          minlength: "8",
-          maxlength: "8",
+          id: "group-id",
+          name: "user_group_id",
+          placeholder: "1234567",
+          minlength: "1",
           size: "32",
           class: "form-input",
           pattern: "^[0-9]+$",
-          title:
-            "Class ID should only contain numbers from 1 - 9 and be 8 digits long",
+          title: "Group ID should only contain numbers from 1 - 9",
         }),
         span({
           class: "validity",
@@ -93,11 +142,10 @@ export class RegisterForm extends Component {
           required: true,
           placeholder: "John Doe",
           class: "form-input",
-          //* Is this minlength?
           minlength: "2",
           maxlength: "32",
           size: "32",
-          pattern: "^([a-zA-Z\s]+){2,32}$",
+          pattern: "^([a-zA-Z ]+){2,32}$",
         }),
         span({
           class: "validity",
@@ -154,9 +202,9 @@ export class RegisterForm extends Component {
           maxlength: "32",
           size: "32",
           class: "form-input",
-          pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,32}$",
+          pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,32}$",
           title:
-            "Password should contain a lowercase and uppercase character, a digit and a special character, and be between 8-20 characters",
+            "Password should contain a lowercase and uppercase character, a digit and a special character, and be between 8-32 characters",
           onchange: () => this.handlePasswordCheck(),
         }),
         span({
@@ -185,7 +233,7 @@ export class RegisterForm extends Component {
           maxlength: "32",
           size: "32",
           class: "form-input",
-          pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,16}$",
+          pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,32}$",
           title:
             "Password should contain a lowercase and uppercase character, a digit and a special character, and be between 8-20 characters",
           onchange: () => this.handlePasswordCheck(),

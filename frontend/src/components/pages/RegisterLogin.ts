@@ -1,15 +1,30 @@
-import PageComponent from "../PageComponent";
+import { navigate } from "../../router";
+import Component from "../Component";
+import { NavBtn } from "../generic/Btn";
+import { div } from "../htmlElementsArtificial";
 
-export default class RegisterLogin extends PageComponent {
+export default class RegisterLogin extends Component {
   constructor() {
     super();
   }
 
-  override fetchPage(): HTMLElement | Array<HTMLElement> {
-    return ();
-  }
-
-  override render(): HTMLElement | Array<HTMLElement> {
-    return ();
+  override render(): HTMLElement {
+    return div(
+      {
+        class: "index-page-wrapper",
+        id: "indexPageWrapper",
+      },
+      div(
+        {
+          class: "index-btn-container",
+        },
+        new NavBtn("", "/forms/register", "Register", (e: Event) =>
+          navigate(e, "/forms/register"),
+        ).render(),
+        new NavBtn("", "/forms/login", "Login", (e: Event) =>
+          navigate(e, "/forms/login"),
+        ).render(),
+      ),
+    );
   }
 }

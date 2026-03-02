@@ -1,10 +1,10 @@
 //? Import required modules
 const createError = require('http-errors');
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const pgp = require('pg-promise');
 
 //? Import routers from ./routes
 const indexRouter = require('./routes/index');
@@ -12,7 +12,13 @@ const formsRouter = require('./routes/forms');
 
 const app = express();
 
-//? View engine setup
+//? Allow CORS origins to be used for client + server
+app.use(cors({
+  origin: ['http://localhost:8080', 'http://localhost:3000'],
+  optionsSuccessStatus: 200
+}));
+
+//? View engine setup - may not need, could use for error page though
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 

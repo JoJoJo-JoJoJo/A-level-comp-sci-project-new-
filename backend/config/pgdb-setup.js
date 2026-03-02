@@ -8,6 +8,7 @@ async function createDBAndConnect() {
     user: process.env.DB_USER || 'postgres',
     host: process.env.DB_HOST || 'localhost',
     database: 'postgres',
+    //? Default to invalid password
     password: process.env.DB_PASSWORD || 'password',
     port: process.env.DB_PORT || 5432,
   });
@@ -42,22 +43,24 @@ async function createDBAndConnect() {
     //? Create 'groups' table
     await dbClient.query(`
       CREATE TABLE IF NOT EXISTS groups (
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(32) NOT NULL
+        group_id SERIAL PRIMARY KEY,
+        group_name VARCHAR(32) NOT NULL
       );
     `);
+
+    //! Change to table-specific column names
 
     console.log('Table "groups" created successfully');
 
     //? Create 'users' table
     await dbClient.query(`
       CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
+        user_id SERIAL PRIMARY KEY,
         group_id INTEGER,
-        FOREIGN KEY (group_id) REFERENCES groups(id),
-        name VARCHAR(32) NOT NULL,
-        email VARCHAR(32) UNIQUE,
-        password VARCHAR(32) NOT NULL
+        FOREIGN KEY (group_id) REFERENCES groups(group_id),
+        user_name VARCHAR(32) NOT NULL,
+        user_email VARCHAR(32) UNIQUE,
+        user_password VARCHAR(32) NOT NULL
       );
     `);
 

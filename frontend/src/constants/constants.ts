@@ -18,6 +18,12 @@ const MODAL_IDS = {
   GAME_COMPLETE: "game_complete",
 };
 
+const FORM_IDS = {
+  REGISTER: "register",
+  LOGIN: "login",
+  CHANGE_PASSWORD: "change_password",
+};
+
 const INIT_CELL_STATE: CellProps<typeof GRID_DIMENSIONS> = {
   gen: {
     isVisited: false,
@@ -73,5 +79,6 @@ export {
   OPP_WALLS,
   GRID_DIMENSIONS,
   MODAL_IDS,
+  FORM_IDS,
   DIR_BTNS,
 };

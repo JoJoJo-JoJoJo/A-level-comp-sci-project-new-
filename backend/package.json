@@ -4,15 +4,17 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon src/index.js",
-    "serverStart": "SET DEBUG=temp_backend:* & pnpm dev",
+    "dev": "nodemon ./bin/www",
+    "serverStart": "SET DEBUG=backend:* & pnpm dev",
     "setupDB": "node ./config/pgdb-setup.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
     "debug": "^4.4.1",
     "dotenv": "^17.3.1",
     "express": "^5.1.0",
+    "express-validator": "^7.3.1",
     "http-errors": "~2.0.0",
     "morgan": "^1.10.0",
     "pg": "^8.18.0",

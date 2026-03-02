@@ -1,24 +1,25 @@
 const express = require('express');
 const router = express.Router();
+const user_controller = require('../controllers/userController');
 
-//? GET forms route (should have a message as needs id)
-router.get('/', function (_req, res, _next) {
-  res.send('Please use a valid form route: register, login, change-password');
-});
+//* Router attached to '/forms'
 
-//? GET register form
-//? GET login form
-//? GET change password form
-router.get('/:id', function (req, res, _next) {
-  res.render('form', { temp_text: `This is the page route for the ${req.params.id} form` });
-});
+//? GET req for creating user
+// router.get('/user/create', user_controller.user_create_get);
 
-//? POST register form
-//? POST login form
-//? POST change password form
-//! Should handle form data + interact with db - then render home page if valid, else go back to form page with previous info saved
-router.post('/:id/submit', function (req, res, next) {
-  res.render('form', { temp_text: `This is the submission route for the ${req.params.id} form` });
-});
+//? POST req for creating user
+router.post('/user/create', user_controller.user_create_post);
+
+//? GET req for user login
+// router.get('/user/login', user_controller.user_login_get);
+
+//? POST req for user login
+router.post('/user/login', user_controller.user_login_post);
+
+//? GET req for updating user (password)
+// router.get('/user/update/password', user_controller.user_update_get);
+
+//? POST req for updating user (password)
+router.post('/user/update/password', user_controller.user_update_put);
 
 module.exports = router;
