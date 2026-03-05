@@ -8,7 +8,7 @@ import genInitGrid from "./genInitGrid";
 function createMaze(
   cols: number,
   rows: number,
-  vStart: Vector<2>,
+  vStart: Vector<2> = new Vector<2>([0, 0]),
 ): CellProps<typeof GRID_DIMENSIONS>[][] {
   const grid = genInitGrid(cols, rows);
 

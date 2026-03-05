@@ -18,6 +18,7 @@ export class Maze extends Component {
     return div(
       {
         class: "maze-wrapper",
+        id: "mazeContainer",
         style: `height: ${GAME_HEIGHT + 10}px; width: ${(cols / rows) * GAME_HEIGHT + 10}px`,
       },
       ul(

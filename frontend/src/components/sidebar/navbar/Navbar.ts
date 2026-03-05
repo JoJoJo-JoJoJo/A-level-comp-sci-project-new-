@@ -1,5 +1,12 @@
-import { DIFFICULTIES, MODAL_IDS } from "../../../constants/constants";
+import Vector from "../../../constants/classes/Vector";
+import {
+  DIFFICULTIES,
+  MODAL_IDS,
+  START_POS,
+} from "../../../constants/constants";
+import createMaze from "../../../utils/createMaze";
 import Component from "../../Component";
+import { Maze } from "../../game/maze/Maze";
 import { nav, ul, li, p } from "../../htmlElementsArtificial";
 // import { SidebarState } from "../Sidebar";
 import "./styles.css";
@@ -64,6 +71,18 @@ export class Navbar extends Component {
                   onclick: (e: MouseEvent) => {
                     e.preventDefault();
                     //* Cause new maze generation here based on difficulty
+                    const [cols, rows] =
+                      DIFFICULTIES[difficulty as keyof typeof DIFFICULTIES];
+
+                    const newMaze = new Maze(
+                      createMaze(cols, rows, new Vector<2>(START_POS)),
+                      [cols, rows],
+                    );
+
+                    const mazeContainer =
+                      document.getElementById("mazeContainer")!;
+
+                    mazeContainer.replaceWith(newMaze.render());
                   },
                 },
                 "<svg-icon-here>",

@@ -80,3 +80,7 @@ export const input: HTMLElementFunction = (
 export const span: HTMLElementFunction = (
   ...args: Array<ElementDefinition>
 ): HTMLElement => createElement("span", ...args);
+
+export const audio: HTMLElementFunction = (
+  ...args: Array<ElementDefinition>
+): HTMLElement => createElement("audio", ...args);

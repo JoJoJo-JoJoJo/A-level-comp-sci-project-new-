@@ -1,5 +1,6 @@
 import Vector from "../../constants/classes/Vector";
-import { DIFFICULTIES } from "../../constants/constants";
+import { DIFFICULTIES, START_POS } from "../../constants/constants";
+import { AudioSource } from "../../utils/audioContext";
 import createMaze from "../../utils/createMaze";
 import Component from "../Component";
 import { Game } from "../game/Game";
@@ -18,12 +19,11 @@ export default class Home extends Component {
     const [cols, rows] = DIFFICULTIES.MEDIUM;
 
     //? If type of 'startPos' is not specified, it is inferred as number[], not [number, number]
-    const startPos: [number, number] = [0, 0];
     // const endPos: [number, number] = [1, 1];
     const endPos: [number, number] = [cols - 1, rows - 1];
-    const maze = createMaze(cols, rows, new Vector<2>(startPos));
+    const maze = createMaze(cols, rows, new Vector<2>(START_POS));
 
-    const game = new Game(maze, { cols, rows }, startPos, endPos);
+    const game = new Game(maze, { cols, rows }, START_POS, endPos);
     function playerMoveHandler(e: KeyboardEvent) {
       e.stopPropagation();
 
@@ -62,6 +62,7 @@ export default class Home extends Component {
       game.render(),
       new SettingsModal().render(),
       new RulesModal().render(),
+      new AudioSource().render(),
     );
   }
 }

@@ -4,7 +4,7 @@ import "./styles.css";
 
 // Dialog needs to be on DOM on first load, but can be toggled on/off with dialog.showModal() and dialog.close()
 
-export class Modal extends Component {
+export abstract class Modal extends Component {
   constructor(id: string) {
     super();
 

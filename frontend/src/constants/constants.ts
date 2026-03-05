@@ -3,6 +3,7 @@ import { CellProps, DirBtns, DirKeys } from "./types";
 
 const GRID_DIMENSIONS = 2;
 const GAME_HEIGHT = 720;
+const START_POS: [number, number] = [0, 0];
 
 //! Fix bug(s) in createMaze.ts for non-square mazes
 const DIFFICULTIES = {
@@ -74,6 +75,7 @@ const DIR_BTNS: DirBtns = {
 export {
   GAME_HEIGHT,
   DIFFICULTIES,
+  START_POS,
   INIT_CELL_STATE,
   MV_DIRS,
   OPP_WALLS,
