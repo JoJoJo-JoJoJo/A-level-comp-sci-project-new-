@@ -1,7 +1,14 @@
-import { updateUserSidebarInfo } from "../../router";
-import { setToSessionStorage } from "../../utils/sessionStorage";
-import Component from "../Component";
-import { div, form, input, label, p, span } from "../htmlElementsArtificial";
+import { updateUserSidebarInfo } from "../../../../router";
+import { setToSessionStorage } from "../../../../utils/sessionStorage";
+import Component from "../../../Component";
+import {
+  div,
+  form,
+  input,
+  label,
+  p,
+  span,
+} from "../../../htmlElementsArtificial";
 import "./styles.css";
 
 export class RegisterForm extends Component {

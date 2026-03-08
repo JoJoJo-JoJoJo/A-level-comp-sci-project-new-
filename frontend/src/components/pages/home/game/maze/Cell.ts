@@ -1,6 +1,6 @@
-import { CellProps } from "../../../constants/types";
-import Component from "../../Component";
-import { div } from "../../htmlElementsArtificial";
+import { CellProps } from "../../../../../constants/types";
+import Component from "../../../../Component";
+import { div } from "../../../../htmlElementsArtificial";
 import "./styles.css";
 
 export class Cell extends Component {

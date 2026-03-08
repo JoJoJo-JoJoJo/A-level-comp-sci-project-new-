@@ -1,16 +1,16 @@
-import DLinkedList from "../../constants/classes/DLinkedList";
-import Vector from "../../constants/classes/Vector";
+import DLinkedList from "../../../../constants/classes/DLinkedList";
+import Vector from "../../../../constants/classes/Vector";
 import {
   DIR_BTNS,
   MODAL_IDS,
   MV_DIRS,
   START_POS,
-} from "../../constants/constants";
-import { CellProps, DirKeys } from "../../constants/types";
-import createMaze from "../../utils/createMaze";
-import Component from "../Component";
-import { button, div, h1, p } from "../htmlElementsArtificial";
-import { GameCompleteModal } from "../modal/modals/GameCompleteModal";
+} from "../../../../constants/constants";
+import { CellProps, DirKeys } from "../../../../constants/types";
+import createMaze from "../../../../utils/createMaze";
+import Component from "../../../Component";
+import { button, div, h1, p } from "../../../htmlElementsArtificial";
+import { GameCompleteModal } from "../../../modal/modals/GameCompleteModal";
 import { Maze } from "./maze/Maze";
 import "./styles.css";
 

@@ -1,7 +1,7 @@
-import { updateUserSidebarInfo } from "../../router";
-import { setToSessionStorage } from "../../utils/sessionStorage";
-import Component from "../Component";
-import { div, form, input, label, span } from "../htmlElementsArtificial";
+import { updateUserSidebarInfo } from "../../../../router";
+import { setToSessionStorage } from "../../../../utils/sessionStorage";
+import Component from "../../../Component";
+import { div, form, input, label, span } from "../../../htmlElementsArtificial";
 import "./styles.css";
 
 export class LoginForm extends Component {
@@ -45,9 +45,7 @@ export class LoginForm extends Component {
 
             const data = await res.json();
 
-            if (typeof data.userId === "string") {
-              setToSessionStorage<number>("userId", +data.userId);
-            }
+            setToSessionStorage<number>("userId", Number(data.userId));
 
             //? If no match, clear password field + refill name field
             if (!data.isMatch) {

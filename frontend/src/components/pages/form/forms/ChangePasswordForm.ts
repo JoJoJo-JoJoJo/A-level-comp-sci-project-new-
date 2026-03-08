@@ -1,7 +1,14 @@
-import { _navigate } from "../../router";
-import { getFromSessionStorage } from "../../utils/sessionStorage";
-import Component from "../Component";
-import { div, form, input, label, p, span } from "../htmlElementsArtificial";
+import { _navigate } from "../../../../router";
+import { getFromSessionStorage } from "../../../../utils/sessionStorage";
+import Component from "../../../Component";
+import {
+  div,
+  form,
+  input,
+  label,
+  p,
+  span,
+} from "../../../htmlElementsArtificial";
 import "./styles.css";
 
 export class ChangePasswordForm extends Component {

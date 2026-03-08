@@ -47,7 +47,7 @@ exports.user_create_post = [
 
     //? If data invalid, send data and relevant error messages to client
     if (!errors.isEmpty()) {
-      return res.status(400).send({
+      return res.status(422).send({
         errors: errors.array()
       })
     }
@@ -141,7 +141,7 @@ exports.user_login_post = [
 
     //? If data invalid, send data and relevant error messages to client
     if (!errors.isEmpty()) {
-      return res.status(400).send({
+      return res.status(422).send({
         errors: errors.array()
       })
     }
@@ -219,6 +219,18 @@ exports.user_update_put = [
       returnScore: false
     })
     .withMessage('Password must contain at least 1 lowercase and 1 uppercase character, 1 number, 1 symbol and be at least 8 characters long'),
+  body('user_password_check')
+    .trim()
+    .escape()
+    .isStrongPassword({
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+      returnScore: false
+    })
+    .withMessage('Password must contain at least 1 lowercase and 1 uppercase character, 1 number, 1 symbol and be at least 8 characters long'),
   //? Process request after validation + sanitization
   async (req, res, _next) => {
     //? Extract validation errors from request (if any)
@@ -226,16 +238,23 @@ exports.user_update_put = [
 
     //? If data invalid, send data and relevant error messages to client
     if (!errors.isEmpty()) {
-      return res.status(400).send({
+      return res.status(422).send({
         errors: errors.array()
       })
     }
 
     //? Extract validated and sanitized data from request body
     const data = matchedData(req);
-    const [userId, newPassword] = [data.user_id, data.user_password];
+    const [userId, newPassword, newPasswordCheck] = [data.user_id, data.user_password, data.user_password_check];
 
     //? If data valid, update user password in DB
+    if (newPassword !== newPasswordCheck) {
+      return res.status(422).send({
+        newPassword: newPassword,
+        newPasswordCheck: newPasswordCheck,
+      });
+    }
+
     await db.query(
       `UPDATE users SET user_password='${newPassword}' WHERE user_id=${userId}`
     );

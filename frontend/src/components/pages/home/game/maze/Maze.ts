@@ -1,7 +1,7 @@
-import { GAME_HEIGHT } from "../../../constants/constants";
-import { CellProps } from "../../../constants/types";
-import Component from "../../Component";
-import { div, ul } from "../../htmlElementsArtificial";
+import { GAME_HEIGHT } from "../../../../../constants/constants";
+import { CellProps } from "../../../../../constants/types";
+import Component from "../../../../Component";
+import { div, ul } from "../../../../htmlElementsArtificial";
 import { Cell } from "./Cell";
 import "./styles.css";
 
