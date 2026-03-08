@@ -66,8 +66,11 @@ class DLinkedList<K> implements DLinkedListProps<K> {
 
     if (node.next !== null) {
       node.next.prev = node.prev;
+    } else {
+      this.tail = node.prev;
     }
 
+    this.length--;
     return node;
   }
 }

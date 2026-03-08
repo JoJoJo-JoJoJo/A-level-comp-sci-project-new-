@@ -1,4 +1,4 @@
-import { MODAL_IDS } from "../../../constants/constants";
+import { AUDIO, MODAL_IDS } from "../../../constants/constants";
 import { navigate } from "../../../router";
 import Component from "../../Component";
 import { NavBtn } from "../../generic/Btn";
@@ -17,8 +17,12 @@ class Settings extends Component {
     super();
   }
 
-  override render(): Array<HTMLElement> {
-    return [
+  override render(): HTMLElement {
+    return div(
+      {
+        class: "settings-container",
+        id: "settingsContainer",
+      },
       div(
         {
           class: "bg-vol-field",
@@ -38,16 +42,13 @@ class Settings extends Component {
           min: "0",
           max: "100",
           value: "50",
-          oninput: (e: InputEvent) => {
-            const bgAudioPlayer = document.getElementById(
-              "bgAudio",
-            )! as HTMLAudioElement;
+          oninput: (e: Event) => {
             const volDisplay = document.getElementById("bgVolDisplay")!;
 
             //? Change audio player volume
             const audioLevel = Number((e.target as HTMLInputElement).value);
 
-            bgAudioPlayer.volume = audioLevel / 50;
+            AUDIO.volume = audioLevel / 100;
             volDisplay.textContent = `${audioLevel}%`;
           },
         }),
@@ -62,7 +63,7 @@ class Settings extends Component {
       new NavBtn("", "/forms/change_password", "Change Password", (e: Event) =>
         navigate(e, "/forms/change_password"),
       ).render(),
-    ];
+    );
   }
 }
 
@@ -91,7 +92,7 @@ export class SettingsModal extends Modal {
         {
           class: "modal-content",
         },
-        ...new Settings().render(),
+        new Settings().render(),
       ),
     );
   }

@@ -84,3 +84,11 @@ export const span: HTMLElementFunction = (
 export const audio: HTMLElementFunction = (
   ...args: Array<ElementDefinition>
 ): HTMLElement => createElement("audio", ...args);
+
+export const i: HTMLElementFunction = (
+  ...args: Array<ElementDefinition>
+): HTMLElement => createElement("i", ...args);
+
+export const img: HTMLElementFunction = (
+  ...args: Array<ElementDefinition>
+): HTMLElement => createElement("img", ...args);

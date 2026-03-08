@@ -1,17 +1,18 @@
+import Component from "./components/Component";
 import { h1 } from "./components/htmlElementsArtificial";
-import Form from "./components/pages/Form";
-import Home from "./components/pages/Home";
-import RegisterLogin from "./components/pages/RegisterLogin";
+import Form from "./components/pages/form/Form";
+import Home from "./components/pages/home/Home";
+import RegisterLogin from "./components/pages/register_login/RegisterLogin";
 import { FORM_IDS } from "./constants/constants";
 import "./styles/global.css";
 
 //? Defines components to be rendered based on current relative URL path
-const routes: Record<string, HTMLElement> = {
-  "/": new RegisterLogin().render(),
-  "/home": new Home().render(),
-  "/forms/register": new Form(FORM_IDS.REGISTER).render(),
-  "/forms/login": new Form(FORM_IDS.LOGIN).render(),
-  "/forms/change_password": new Form(FORM_IDS.CHANGE_PASSWORD).render(),
+const routes: Record<string, Component> = {
+  "/": new RegisterLogin(),
+  "/home": new Home(),
+  "/forms/register": new Form(FORM_IDS.REGISTER),
+  "/forms/login": new Form(FORM_IDS.LOGIN),
+  "/forms/change_password": new Form(FORM_IDS.CHANGE_PASSWORD),
 };
 
 //? Helper function for navigation + when no event given
@@ -32,7 +33,9 @@ function updateContent(): void {
   const path = window.location.pathname;
   const root = document.getElementById("root")!;
   //! Replace 404 error h1 element with proper error display component
-  root.replaceChildren(routes[path] || h1("404 - Not Found"));
+  root.replaceChildren(
+    (routes[path].render() as HTMLElement) || h1("404 - Not Found"),
+  );
 }
 
 function updateUserSidebarInfo({
@@ -53,6 +56,22 @@ function updateUserSidebarInfo({
   groupContainer.innerText = groupName;
   iconContainer.innerText = name.slice(0, 1).toUpperCase();
 }
+
+//? Handle audio
+//? Audio init
+// const audio = new Audio(BG_AUDIO_SRC);
+// audio.muted = true;
+
+// audio.play().catch(() => {
+//   document.body.addEventListener(
+//     "click",
+//     () => {
+//       audio.muted = false;
+//       audio.play();
+//     },
+//     { once: true },
+//   );
+// });
 
 //? Handle browser nav (back/forward btns)
 window.onpopstate = updateContent;

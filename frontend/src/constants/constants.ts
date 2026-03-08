@@ -1,5 +1,6 @@
 import Vector from "./classes/Vector";
 import { CellProps, DirBtns, DirKeys } from "./types";
+import bgAudio from "../assets/mixkit-classical-jazz-689.mp3";
 
 const GRID_DIMENSIONS = 2;
 const GAME_HEIGHT = 720;
@@ -72,6 +73,11 @@ const DIR_BTNS: DirBtns = {
   },
 };
 
+//* Audio
+const AUDIO = new Audio(bgAudio);
+AUDIO.volume = 0.5;
+AUDIO.loop = true;
+
 export {
   GAME_HEIGHT,
   DIFFICULTIES,
@@ -83,4 +89,5 @@ export {
   MODAL_IDS,
   FORM_IDS,
   DIR_BTNS,
+  AUDIO,
 };

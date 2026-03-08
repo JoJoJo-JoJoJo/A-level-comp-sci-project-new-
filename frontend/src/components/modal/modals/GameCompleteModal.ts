@@ -57,23 +57,7 @@ export class GameCompleteModal extends Modal {
           button(
             {
               class: "btn modal-play-again",
-              onclick: (e: MouseEvent): void => {
-                //? Prevent potential default refresh behavior + event propagation on DOM
-                e.preventDefault();
-                e.stopPropagation();
-                console.log(e);
-
-                //* Regenerate maze of same difficulty
-
-                //? Hide game complete modal on UI + remove from DOM
-                // const root = document.getElementById("root")!;
-                const gcModal = document.getElementById(
-                  MODAL_IDS.GAME_COMPLETE,
-                );
-                if (!(gcModal instanceof HTMLDialogElement)) return;
-                gcModal.close();
-                gcModal.parentNode!.removeChild(gcModal);
-              },
+              id: "modalPlayAgainBtn",
             },
             "Play again",
           ),

@@ -1,0 +1,13 @@
+.index-page-wrapper {
+  height: 100%;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.index-btn-container {
+  width: auto;
+  height: auto;
+  padding: 10px;
+}

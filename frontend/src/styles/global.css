@@ -241,7 +241,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* These styles need moving to their proper directory in time */
+/*! These styles need moving to their proper directory in time */
 
 .home-page-wrapper {
   height: 100%;
@@ -249,20 +249,6 @@ body {
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: 1;
-}
-
-.index-page-wrapper {
-  height: 100%;
-  width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.index-btn-container {
-  width: auto;
-  height: auto;
-  padding: 10px;
 }
 
 .form-page-wrapper {
@@ -273,6 +259,8 @@ body {
   align-items: center;
 }
 
+/*? Belongs in global because form submit btns will need style */
+/** Could however make a FormSubmitBtn so style goes in "components/generic/Btn" */
 .btn {
   padding: 5px;
 }

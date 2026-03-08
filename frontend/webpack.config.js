@@ -16,7 +16,7 @@ export default {
     //? Defines the port number to be used for the frontend in development
     port: 8080,
     static: "./dist",
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
     //? Defines rules for compiling and bundling different types of files
@@ -32,6 +32,13 @@ export default {
           "style-loader",
           "css-loader"
         ]
+      },
+      {
+        test: /\.(svg|mp3)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "audio/[name].[hash:8][ext]"
+        }
       }
     ],
   },
@@ -43,6 +50,7 @@ export default {
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
+    // assetModuleFilename: "assets/[hash][ext][query]",
     clean: true,
   },
   //? Inserts a custom-made template html file into the output bundle
@@ -51,6 +59,7 @@ export default {
       inject: true,
       template: `./src/index.html`,
       filename: `index.html`,
+      favicon: "./public/favicon.ico"
     })
   ],
   // optimization: {

@@ -1,0 +1,24 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  color: white;
+}
+
+.dir-btns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1;
+  gap: 40px;
+}
+
+.dir-btn {
+  /*! TEMP HEIGHT AND WIDTH FOR UI LAYOUT */
+  height: 80px;
+  width: 80px;
+}

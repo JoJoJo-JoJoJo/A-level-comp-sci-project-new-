@@ -34,7 +34,6 @@ export default abstract class Component {
   //? This handler causes a re-render of the target component whilst preserving its state --> target [[Set]] internal method
   fieldHandler: ProxyHandler<any> = {
     set: (target: any, prop: string | symbol, value: any): boolean => {
-      console.log("Changing state");
       target[prop] = value;
       this.render();
       return true;

@@ -1,0 +1,37 @@
+.user-segment {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  /*! temp color for UI layout */
+  border-bottom: 2px solid red;
+  /* border-bottom: 2px solid var(--gray-8); */
+}
+
+.user-icon {
+  height: 100%;
+  /*! temp hardcoded value */
+  width: 108px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-icon > p {
+  font-size: 4rem;
+}
+
+.user-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.user-name {
+  font-size: 2rem;
+}
+
+.user-group {
+  font-size: 1.5rem;
+}

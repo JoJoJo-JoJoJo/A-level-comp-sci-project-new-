@@ -1,3 +1,4 @@
+//? Set a new key-value pair to session storage
 function setToSessionStorage<T>(key: string, value: T): void {
   try {
     window.sessionStorage.setItem(key, JSON.stringify(value));
@@ -8,6 +9,7 @@ function setToSessionStorage<T>(key: string, value: T): void {
   }
 }
 
+//? Get an item from session storage (if exists) + coerce it to given type
 function getFromSessionStorage<T>(key: string): T | null {
   const item = window.sessionStorage.getItem(key);
   if (item === null) return null;

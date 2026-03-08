@@ -18,4 +18,4 @@
 
 8. Serve the completed frontend build to port 8080 with `pnpm start` (in frontend terminal) - alternatively you can choose the port yourself in the webpack config under `devServer.port`
 
-9. In the backend terminal use `pnpm start` to run the server, or alternatively use `pnpm dev` to run the server in dev mode (includes live reloading)
+9. In the backend terminal use `pnpm serverStart` to run the server in debug mode, or alternatively use `pnpm dev` to run the server in dev mode (includes live reloading)
