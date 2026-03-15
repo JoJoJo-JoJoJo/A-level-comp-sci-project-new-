@@ -1,14 +1,15 @@
 import Vector from "../../../constants/classes/Vector";
-import { AUDIO, DIFFICULTIES, START_POS } from "../../../constants/constants";
+import { DIFFICULTIES, START_POS } from "../../../constants/constants";
 import { CellProps } from "../../../constants/types";
 import createMaze from "../../../utils/createMaze";
 import Component from "../../Component";
 import { Game } from "./game/Game";
-import Btn from "../../generic/Btn";
+// import Btn from "../../generic/Btn";
 import { div } from "../../htmlElementsArtificial";
 import { RulesModal } from "../../modal/modals/RulesModal";
 import { SettingsModal } from "../../modal/modals/SettingsModal";
 import { Sidebar } from "./sidebar/Sidebar";
+import "./styles.css";
 
 export default class Home extends Component {
   private game: Game | null = null;
@@ -92,11 +93,11 @@ export default class Home extends Component {
       this.game.render(),
       new SettingsModal().render(),
       new RulesModal().render(),
-      new Btn("", "Play", (e: Event) => {
-        e.preventDefault();
+      // new Btn("", "Play", (e: Event) => {
+      //   e.preventDefault();
 
-        AUDIO.play();
-      }).render(),
+      //   AUDIO.play();
+      // }).render(),
     );
   }
 }

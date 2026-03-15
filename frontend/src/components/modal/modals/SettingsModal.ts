@@ -6,11 +6,13 @@ import {
   button,
   dialog,
   div,
+  h2,
   input,
   label,
   span,
 } from "../../htmlElementsArtificial";
 import { Modal } from "../Modal";
+import "./settings.css";
 
 class Settings extends Component {
   constructor() {
@@ -60,8 +62,11 @@ class Settings extends Component {
           "50%",
         ),
       ),
-      new NavBtn("", "/forms/change_password", "Change Password", (e: Event) =>
-        navigate(e, "/forms/change_password"),
+      new NavBtn(
+        "change-pw-btn",
+        "/forms/change_password",
+        "Change Password",
+        (e: Event) => navigate(e, "/forms/change_password"),
       ).render(),
     );
   }
@@ -92,6 +97,12 @@ export class SettingsModal extends Modal {
         {
           class: "modal-content",
         },
+        h2(
+          {
+            class: "settings-title",
+          },
+          "Settings",
+        ),
         new Settings().render(),
       ),
     );

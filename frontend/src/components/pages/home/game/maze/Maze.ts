@@ -17,6 +17,7 @@ export class Maze extends Component {
             `row_${i}_tile${j}`,
             tile,
             `${(GAME_HEIGHT * (order[0] as number)) / (order[1] as number) ** 2}px`,
+            order[0] < 20 && order[1] < 20 ? 2 : 1,
           ),
       ),
     );
@@ -42,6 +43,7 @@ export class Maze extends Component {
                 `row_${i}_tile${j}`,
                 tile,
                 `${(GAME_HEIGHT * (cols as number)) / (rows as number) ** 2}px`,
+                cols < 20 && rows < 20 ? 2 : 1,
               ),
           ),
       );

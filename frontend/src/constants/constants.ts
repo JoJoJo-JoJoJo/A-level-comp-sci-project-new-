@@ -38,6 +38,7 @@ const INIT_CELL_STATE: CellProps<typeof GRID_DIMENSIONS> = {
     pos: new Vector<2>([-1, -1]),
   },
   isPath: false,
+  isHead: false,
 };
 
 const MV_DIRS: [DirKeys, Vector<2>][] = [

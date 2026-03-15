@@ -17,6 +17,7 @@ function createMaze(
     grid[vStart.data[1]][vStart.data[0]];
   initCell.gen.isVisited = true;
   initCell.isPath = true;
+  initCell.isHead = true;
 
   let stack: StackProps<CellProps<typeof GRID_DIMENSIONS>> = new Stack();
   stack.push(initCell);

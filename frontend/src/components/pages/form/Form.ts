@@ -4,6 +4,7 @@ import { ChangePasswordForm } from "./forms/ChangePasswordForm";
 import { LoginForm } from "./forms/LoginForm";
 import { RegisterForm } from "./forms/RegisterForm";
 import { div } from "../../htmlElementsArtificial";
+import "./styles.css";
 
 export default class Form extends Component {
   constructor(formId: string) {

@@ -1,0 +1,16 @@
+.modal-game-complete-msg {
+  letter-spacing: 2px;
+}
+
+.modal-player-time {
+  font-size: 5rem;
+}
+
+.modal-play-again {
+  outline: none;
+  border-color: var(--violet-11);
+  background-color: var(--violet-a3);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 12px var(--violet-a6);
+}

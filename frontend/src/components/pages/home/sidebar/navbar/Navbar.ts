@@ -9,7 +9,6 @@ import createMaze from "../../../../../utils/createMaze";
 import Component from "../../../../Component";
 import { nav, ul, li, p, i } from "../../../../htmlElementsArtificial";
 import "./styles.css";
-// import settingsIcon from "../../../assets/settings.svg";
 
 export class Navbar extends Component {
   constructor(
@@ -107,7 +106,6 @@ export class Navbar extends Component {
                     );
                   },
                 },
-                "<svg-icon-here>",
                 p(difficulty),
               ),
             ),
@@ -120,8 +118,6 @@ export class Navbar extends Component {
               this.activateModal(MODAL_IDS.SETTINGS);
             },
           },
-          // settingsIcon,
-          "<svg-icon-here>",
           p("Settings"),
         ),
         li(
@@ -131,7 +127,6 @@ export class Navbar extends Component {
               this.activateModal(MODAL_IDS.RULES);
             },
           },
-          "<svg-icon-here>",
           p("Rules"),
         ),
       ),

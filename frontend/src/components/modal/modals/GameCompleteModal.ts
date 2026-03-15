@@ -1,8 +1,7 @@
 import { MODAL_IDS } from "../../../constants/constants";
 import { button, dialog, div, h2, time } from "../../htmlElementsArtificial";
 import { Modal } from "../Modal";
-import "../styles.css";
-import "./styles.css";
+import "./game-complete.css";
 
 export class GameCompleteModal extends Modal {
   constructor() {

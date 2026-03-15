@@ -1,6 +1,7 @@
 import { _navigate } from "../../../../router";
 import { getFromSessionStorage } from "../../../../utils/sessionStorage";
 import Component from "../../../Component";
+import { SubmitBtn } from "../../../generic/Btn";
 import {
   div,
   form,
@@ -168,12 +169,7 @@ export class ChangePasswordForm extends Component {
         }),
       ),
       //? Form submit button
-      input({
-        type: "submit",
-        id: "submit-btn",
-        name: "form_submit_button",
-        value: "Submit",
-      }),
+      new SubmitBtn("submit-btn", "Submit", "submit-btn").render(),
     );
   }
 }

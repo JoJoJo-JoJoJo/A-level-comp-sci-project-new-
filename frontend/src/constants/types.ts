@@ -52,6 +52,7 @@ type CellProps<S extends number> = {
     pos: Vector<S>;
   };
   isPath: boolean;
+  isHead: boolean;
 };
 
 type DirBtns = Record<

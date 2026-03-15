@@ -19,10 +19,10 @@ export default class RegisterLogin extends Component {
         {
           class: "index-btn-container",
         },
-        new NavBtn("", "/forms/register", "Register", (e: Event) =>
+        new NavBtn("index-btn", "/forms/register", "Register", (e: Event) =>
           navigate(e, "/forms/register"),
         ).render(),
-        new NavBtn("", "/forms/login", "Login", (e: Event) =>
+        new NavBtn("index-btn", "/forms/login", "Login", (e: Event) =>
           navigate(e, "/forms/login"),
         ).render(),
       ),

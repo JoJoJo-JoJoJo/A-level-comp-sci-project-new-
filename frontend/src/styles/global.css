@@ -64,7 +64,7 @@ h6 {
   isolation: isolate;
 }
 
-/* For now I'll use dark theme only */
+/*? For now I'll use dark theme only */
 :root,
 .dark,
 .dark-theme {
@@ -131,6 +131,38 @@ h6 {
   --gray-surface: rgba(0, 0, 0, 0.05);
   --gray-indicator: #6c6e79;
   --gray-track: #6c6e79;
+
+  /** SECONDARY ACCENT SCALE */
+  --deep-violet-1: #070a1d;
+  --deep-violet-2: #10132f;
+  --deep-violet-3: #191861;
+  --deep-violet-4: #22138a;
+  --deep-violet-5: #2a1d9f;
+  --deep-violet-6: #322ab1;
+  --deep-violet-7: #3b36c9;
+  --deep-violet-8: #473fee;
+  --deep-violet-9: #372ec2;
+  --deep-violet-10: #2c22a3;
+  --deep-violet-11: #9daeff;
+  --deep-violet-12: #d5e0ff;
+
+  --deep-violet-a1: #000afd0f;
+  --deep-violet-a2: #174eff22;
+  --deep-violet-a3: #2c32fd58;
+  --deep-violet-a4: #341cff83;
+  --deep-violet-a5: #3c2aff99;
+  --deep-violet-a6: #433afead;
+  --deep-violet-a7: #4843ffc6;
+  --deep-violet-a8: #4b43ffed;
+  --deep-violet-a9: #443afebf;
+  --deep-violet-a10: #3e31fe9e;
+  --deep-violet-a11: #9daeff;
+  --deep-violet-a12: #d5e0ff;
+
+  --deep-violet-contrast: #fff;
+  --deep-violet-surface: #111c4f80;
+  --deep-violet-indicator: #372ec2;
+  --deep-violet-track: #372ec2;
 }
 
 @supports (color: color(display-p3 1 1 1)) {
@@ -200,6 +232,38 @@ h6 {
       --gray-surface: color(display-p3 0 0 0 / 5%);
       --gray-indicator: oklch(54% 0.0167 277.7);
       --gray-track: oklch(54% 0.0167 277.7);
+
+      /** SECONDARY ACCENT SCALE */
+      --deep-violet-1: oklch(15.4% 0.0416 274.7);
+      --deep-violet-2: oklch(20.2% 0.0537 274.7);
+      --deep-violet-3: oklch(26.9% 0.1248 274.7);
+      --deep-violet-4: oklch(31.7% 0.1783 274.7);
+      --deep-violet-5: oklch(35.9% 0.1945 274.7);
+      --deep-violet-6: oklch(40% 0.2015 274.7);
+      --deep-violet-7: oklch(44.9% 0.2174 274.7);
+      --deep-violet-8: oklch(50.5% 0.2491 274.7);
+      --deep-violet-9: oklch(42.7% 0.2174 274.7);
+      --deep-violet-10: oklch(37% 0.1945 274.7);
+      --deep-violet-11: oklch(77.6% 0.2311 274.7);
+      --deep-violet-12: oklch(91.3% 0.0761 274.7);
+
+      --deep-violet-a1: color(display-p3 0 0.0431 0.9882 / 0.055);
+      --deep-violet-a2: color(display-p3 0.149 0.3216 1 / 0.125);
+      --deep-violet-a3: color(display-p3 0.1882 0.2078 1 / 0.325);
+      --deep-violet-a4: color(display-p3 0.2 0.1216 1 / 0.488);
+      --deep-violet-a5: color(display-p3 0.2314 0.1765 1 / 0.575);
+      --deep-violet-a6: color(display-p3 0.2667 0.2314 1 / 0.646);
+      --deep-violet-a7: color(display-p3 0.2863 0.2706 1 / 0.742);
+      --deep-violet-a8: color(display-p3 0.298 0.2745 1 / 0.892);
+      --deep-violet-a9: color(display-p3 0.2745 0.2392 1 / 0.713);
+      --deep-violet-a10: color(display-p3 0.2392 0.2 1 / 0.592);
+      --deep-violet-a11: color(display-p3 0.6431 0.6941 1 / 0.975);
+      --deep-violet-a12: color(display-p3 0.8549 0.8902 1 / 0.988);
+
+      --deep-violet-contrast: #fff;
+      --deep-violet-surface: color(display-p3 0.0706 0.1098 0.2902 / 0.5);
+      --deep-violet-indicator: oklch(42.7% 0.2174 274.7);
+      --deep-violet-track: oklch(42.7% 0.2174 274.7);
     }
   }
 }
@@ -210,7 +274,7 @@ h6 {
   --color-background: #0f0a0f;
 }
 
-/* Core CSS styles */
+/*? Core CSS styles */
 
 html {
   font-size: 16px;
@@ -219,8 +283,9 @@ html {
 body {
   height: 100vh;
   width: 100vw;
-  font-family: monospace;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
+  font-size: 16px;
 }
 
 #root {
@@ -238,29 +303,4 @@ body {
   );
   --tile-size: calc(100vw / 20);
   background-size: var(--tile-size) var(--tile-size);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/*! These styles need moving to their proper directory in time */
-
-.home-page-wrapper {
-  height: 100%;
-  width: auto;
-  display: grid;
-  grid-template-columns: 20% 80%;
-  grid-template-rows: 1;
-}
-
-.form-page-wrapper {
-  height: 100%;
-  width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/*? Belongs in global because form submit btns will need style */
-/** Could however make a FormSubmitBtn so style goes in "components/generic/Btn" */
-.btn {
-  padding: 5px;
 }

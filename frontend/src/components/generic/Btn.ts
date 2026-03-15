@@ -1,8 +1,9 @@
 import Component from "../Component";
-import { a, button, p } from "../htmlElementsArtificial";
+import { a, button, input, p } from "../htmlElementsArtificial";
+import "./styles.css";
 
 export default class Btn extends Component {
-  constructor(classes: string, text: string, onclick: (e: Event) => void) {
+  constructor(classes: string, text: string, onclick?: (e: Event) => void) {
     super();
 
     this.setState({
@@ -16,7 +17,10 @@ export default class Btn extends Component {
     return button(
       {
         class: "btn " + this.state.classes,
-        onclick: this.state.onclick,
+        onclick:
+          typeof this.state.onclick === "undefined"
+            ? () => {}
+            : this.state.onclick,
       },
       p(
         {
@@ -46,23 +50,39 @@ export class NavBtn extends Btn {
   }
 
   override render(): HTMLElement {
-    return a(
+    return button(
       {
-        class: "btn-link",
+        class: "btn " + this.state.classes,
         onclick: this.state.onclick,
-        href: this.state.href,
       },
-      button(
+      a(
         {
-          class: "btn " + this.state.classes,
+          class: "btn-text",
+          href: this.state.href,
         },
-        p(
-          {
-            class: "btn-text",
-          },
-          this.state.text,
-        ),
+        this.state.text,
       ),
     );
+  }
+}
+
+export class SubmitBtn extends Btn {
+  constructor(classes: string, text: string, id: string) {
+    super(classes, text);
+
+    this.setState({
+      ...this.state,
+      id,
+    });
+  }
+
+  override render(): HTMLElement {
+    return input({
+      type: "submit",
+      id: this.state.id,
+      class: "btn " + this.state.classes,
+      name: "form_submit_button",
+      value: this.state.text,
+    });
   }
 }

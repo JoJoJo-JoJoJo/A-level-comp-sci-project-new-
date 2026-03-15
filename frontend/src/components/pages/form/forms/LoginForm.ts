@@ -1,6 +1,7 @@
 import { updateUserSidebarInfo } from "../../../../router";
 import { setToSessionStorage } from "../../../../utils/sessionStorage";
 import Component from "../../../Component";
+import { SubmitBtn } from "../../../generic/Btn";
 import { div, form, input, label, span } from "../../../htmlElementsArtificial";
 import "./styles.css";
 
@@ -136,12 +137,7 @@ export class LoginForm extends Component {
         }),
       ),
       //? Form submit button
-      input({
-        type: "submit",
-        id: "loginSubmitBtn",
-        name: "form_submit_button",
-        value: "Submit",
-      }),
+      new SubmitBtn("submit-btn", "Submit", "loginSubmitBtn").render(),
     );
   }
 }

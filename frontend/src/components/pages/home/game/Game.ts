@@ -1,6 +1,7 @@
 import DLinkedList from "../../../../constants/classes/DLinkedList";
 import Vector from "../../../../constants/classes/Vector";
 import {
+  AUDIO,
   DIR_BTNS,
   MODAL_IDS,
   MV_DIRS,
@@ -9,7 +10,8 @@ import {
 import { CellProps, DirKeys } from "../../../../constants/types";
 import createMaze from "../../../../utils/createMaze";
 import Component from "../../../Component";
-import { button, div, h1, p } from "../../../htmlElementsArtificial";
+import Btn from "../../../generic/Btn";
+import { div, h1 } from "../../../htmlElementsArtificial";
 import { GameCompleteModal } from "../../../modal/modals/GameCompleteModal";
 import { Maze } from "./maze/Maze";
 import "./styles.css";
@@ -69,6 +71,15 @@ export class Game extends Component {
       number,
       number,
     ];
+    //? Since not generating new maze instance, manually reset head styles on maze
+    const { cols, rows } = order;
+    this.state.mazeComponent.state.grid[rows - 1][cols - 1].isHead = false;
+    this.state.mazeComponent.state.cellInstances[rows - 1][
+      cols - 1
+    ].state.isHead = false;
+
+    this.state.mazeComponent.state.grid[0][0].isHead = true;
+    this.state.mazeComponent.state.cellInstances[0][0].state.isHead = true;
 
     const newDLL = new DLinkedList<[number, number]>();
     newDLL.insert(this.state.startPos);
@@ -87,6 +98,7 @@ export class Game extends Component {
   }
 
   //? Helper method to calculate time in MM:SS format
+  //* Change to use ms? Just a thought :)
   private calculateTime(): string {
     //? Calculate time difference in seconds
     const { start, end } = this.state.times;
@@ -205,7 +217,13 @@ export class Game extends Component {
       }
     }
 
-    // this.state.maze = this.state.maze;
+    //? Remove head style from current cell and add to new cell
+    this.state.mazeComponent.state.grid[y][x].isHead = false;
+    this.state.mazeComponent.state.cellInstances[y][x].state.isHead = false;
+
+    this.state.mazeComponent.state.grid[newY][newX].isHead = true;
+    this.state.mazeComponent.state.cellInstances[newY][newX].state.isHead =
+      true;
   }
 
   //? Renders the HTML for the component
@@ -215,23 +233,21 @@ export class Game extends Component {
         class: "game",
       },
       h1({ class: "title" }, "AMAZE"),
+      new Btn("play-audio-btn", "Play", (e: Event) => {
+        e.preventDefault();
+
+        AUDIO.play();
+      }).render(),
       this.state.mazeComponent.render(),
       div(
         {
           class: "dir-btns",
         },
-        ...Object.values(DIR_BTNS).map(({ key, svg }) =>
-          button(
-            {
-              class: "dir-btn",
-              id: `dir-${key}`,
-              onclick: (e: MouseEvent) => {
-                e.stopPropagation();
-                this.handlePlayerMove(key);
-              },
-            },
-            p(svg === "" ? key : svg),
-          ),
+        ...Object.values(DIR_BTNS).map(({ key }) =>
+          new Btn("dir-btn", key, (e) => {
+            e.stopPropagation();
+            this.handlePlayerMove(key);
+          }).render(),
         ),
       ),
     );

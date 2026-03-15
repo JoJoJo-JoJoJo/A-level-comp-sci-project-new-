@@ -10,18 +10,25 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  /*! temp color for UI layout */
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid var(--violet-7);
+  background-color: var(--violet-a3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--violet-12);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .nav li:hover {
-  /*! temp color for UI layout */
-  background: blue;
+  background-color: var(--violet-6);
+  color: var(--violet-12);
+  box-shadow: inset 2px 0 8px var(--violet-a8);
 }
 
 .nav > li:hover {
-  /*! temp color for UI layout */
-  color: white;
+  color: var(--violet-12);
+  text-shadow: 0 0 12px var(--violet-a8);
 }
 
 .dropdown-arrow {
@@ -38,12 +45,17 @@
   position: absolute;
   top: 0;
   left: 100%;
-  /*! temp color for UI layout */
-  background: #fff;
+  background: linear-gradient(135deg, var(--violet-2), var(--violet-3));
+  backdrop-filter: blur(12px);
+  border-left: 2px solid var(--violet-8);
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
   z-index: 2;
   overflow: hidden;
   height: 0;
-  transition: height 0.3s ease;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 220px;
+  margin-left: 8px;
 }
 
 .dropdown-menu.show {
@@ -53,8 +65,18 @@
 
 .dropdown-menu > li > p {
   display: block;
-  padding: 10px 15px;
-  /*! temp color for UI layout */
-  color: #333;
+  padding: 14px 18px;
+  color: var(--violet-12);
   text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+  background-color: transparent;
+}
+
+.dropdown-menu > li > p:hover {
+  background-color: var(--violet-6);
+  padding-left: 24px;
+  box-shadow: inset 2px 0 8px var(--violet-a8);
 }
